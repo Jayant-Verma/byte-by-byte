@@ -19,3 +19,15 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+pre {
+    @apply bg-gray-800 text-white rounded-lg overflow-x-auto;
+}
+
+code {
+    @apply font-mono text-sm;
+}
+
+code.inline {
+    @apply bg-gray-200 text-gray-800 px-1 py-0.5 rounded;
+}
