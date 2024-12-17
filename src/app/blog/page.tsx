@@ -11,7 +11,7 @@ export default async function BlogPage() {
                 {posts.map(({ id, title, date }) => (
                     <li key={id} className="mb-3">
                         <Link href={`/blog/${id}`}>
-                            <a className="text-blue-500 hover:underline text-xl">{title}</a>
+                            <span className="text-blue-500 hover:underline text-xl">{title}</span>
                         </Link>
                         <p className="text-gray-500 text-sm">{date}</p>
                     </li>

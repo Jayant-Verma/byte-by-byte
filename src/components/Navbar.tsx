@@ -1,106 +1,75 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTheme } from '@/context/ThemeContext';
-import Link from 'next/link';
-import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from "next/link";
+import { HomeIcon, UserIcon, ChatBubbleLeftIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation"; 
 
 const Navbar = () => {
-    const { theme, toggleTheme } = useTheme();
-    const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     const navLinks = [
-        { name: 'Home', href: '/' },
-        { name: 'About', href: '/about' },
-        { name: 'Blog', href: '/blog' },
-        { name: 'Contact', href: '/contact' },
+        { name: "Home", href: "/", icon: <HomeIcon className="w-6 h-6" /> },
+        { name: "About", href: "/about", icon: <UserIcon className="w-6 h-6" /> },
+        { name: "Blog", href: "/blog", icon: <DocumentTextIcon className="w-6 h-6" /> },
+        { name: "Contact", href: "/contact", icon: <ChatBubbleLeftIcon className="w-6 h-6" /> },
     ];
 
+    const isActive = (linkHref: string) => {
+        console.log(linkHref, pathname);
+        if (pathname && linkHref === pathname) {
+            return "text-orange-500 dark:text-orange-400";
+        }
+        return "text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-400"; 
+    };
+
     return (
-        <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md transition-all">
-            <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-                {/* Logo */}
-                <Link href="/">
-                    <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 hover:scale-105 transition-transform">
-                        My Blog
-                    </h1>
-                </Link>
-
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center space-x-6">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-2 rounded-md text-lg font-medium transition-all"
-                        >
-                            {link.name}
-                        </Link>
+        <div className="z-50 fixed flex justify-center w-full font-bold">
+            {/* Wrapper with conditional colors */}
+            <div className="border border-gray-200 dark:border-gray-700 mt-8 backdrop-blur-3xl rounded-3xl hidden md:flex justify-between items-center p-2 max-w-[400px] mx-auto bg-white/60 dark:bg-gray-800/70 shadow-md">
+                <ul className="flex flex-row p-2 space-x-8">
+                    {navLinks.map((link, index) => (
+                        <li key={index}>
+                            <Link
+                                href={link.href}
+                                className={`transform transition-all duration-300 ease-in-out ${isActive(link.href)}`}
+                            >
+                                {link.name}
+                            </Link>
+                        </li>
                     ))}
-
-                    {/* Theme Toggle Button */}
-                    <button
-                        onClick={toggleTheme}
-                        className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                        aria-label="Toggle Theme"
-                    >
-                        {theme === 'dark' ? (
-                            <SunIcon className="w-6 h-6 text-yellow-500" />
-                        ) : (
-                            <MoonIcon className="w-6 h-6 text-blue-500" />
-                        )}
-                    </button>
-                </nav>
-
-                {/* Mobile Menu Toggle and Theme Button */}
-                <div className="flex items-center space-x-2 md:hidden">
-                    {/* Theme Toggle Button */}
-                    <button
-                        onClick={toggleTheme}
-                        className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                        aria-label="Toggle Theme"
-                    >
-                        {theme === 'dark' ? (
-                            <SunIcon className="w-6 h-6 text-yellow-500" />
-                        ) : (
-                            <MoonIcon className="w-6 h-6 text-blue-500" />
-                        )}
-                    </button>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-                        aria-label="Toggle Menu"
-                    >
-                        {isOpen ? (
-                            <XMarkIcon className="w-6 h-6" />
-                        ) : (
-                            <Bars3Icon className="w-6 h-6" />
-                        )}
-                    </button>
-                </div>
+                </ul>
             </div>
 
             {/* Mobile Menu */}
-            {isOpen && (
-                <nav className="md:hidden bg-white dark:bg-gray-900 shadow-lg">
-                    <ul className="flex flex-col space-y-2 p-4">
-                        {navLinks.map((link) => (
-                            <li key={link.name}>
-                                <Link
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="block text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-lg font-medium transition-all"
-                                >
-                                    {link.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            )}
-        </header>
+            <div className="fixed bottom-2 left-2 right-2 z-50 border border-transparent backdrop-blur-3xl rounded-3xl shadow-lg bg-gray-200/60 dark:bg-gray-800/70 md:hidden">
+                {/* Funky Mobile Navbar */}
+                <div className="flex justify-between items-center px-10 py-3 bg-opacity-60 backdrop-blur-md rounded-3xl">
+                    {navLinks.map((link, index) => (
+                        <motion.div
+                            key={index}
+                            whileHover={{
+                                scale: 1.2,
+                                rotate: 15,
+                                color: "#ffeb3b",
+                            }}
+                            whileTap={{
+                                scale: 0.85,
+                                rotate: -15,
+                            }}
+                            className="flex flex-col items-center justify-center transition-all duration-300"
+                        >
+                            <Link
+                                href={link.href}
+                                className={`flex items-center justify-center transition-all duration-300 ${isActive(link.href)}`}
+                            >
+                                {link.icon}
+                            </Link>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 };
 

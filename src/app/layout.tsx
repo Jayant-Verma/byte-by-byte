@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@/context/ThemeContext';
 import Navbar from '@/components/Navbar';
 import './globals.css';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 export const metadata = {
     title: 'My Blog',
@@ -17,6 +18,7 @@ export default function RootLayout({
             <body>
                 <ThemeProvider>
                     <Navbar />
+                    <ThemeSwitch />
                     <main>{children}</main>
                 </ThemeProvider>
             </body>
