@@ -1,8 +1,8 @@
-import { getPostData, getSortedPostsData } from '@/lib/posts';
-import ReactMarkdown from 'react-markdown';
-import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm';
-import Image from 'next/image';
+import { getPostData, getSortedPostsData } from "@/lib/posts";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import Image from "next/image";
+import CodeBlock from "@/components/CodeBlock"; // Import the new CodeBlock component
 
 export async function generateStaticParams() {
     const posts = getSortedPostsData();
@@ -12,52 +12,73 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-    const {slug} = params;
+    const { slug } = params;
     const post = await getPostData(slug);
 
     return (
-        <main className="p-6">
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-            <p className="text-gray-500 mb-6">{post.date}</p>
-            <article className="prose prose-lg max-w-none">
+        <main className="p-6 max-w-5xl mx-auto">
+            <header className="text-center mt-20 mb-10">
+                <h1 className="text-5xl font-extrabold text-gray-800 dark:text-gray-200">{post.title}</h1>
+                <div className="text-gray-500 mb-4 italic text-sm">{post.date}</div>
+            </header>
+
+            <article className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
                     components={{
                         img: ({ src, alt, ...props }) => {
-                            const [altText, width, height] = (alt || '')
-                                .split('|')
+                            const [altText, width, height] = (alt || "")
+                                .split("|")
                                 .map((part: string) => part.trim());
 
-                            const widthValue = width?.startsWith('width=') ? parseInt(width.split('=')[1], 10) : 800;
-                            const heightValue = height?.startsWith('height=') ? parseInt(height.split('=')[1], 10) : 450;
+                            const widthValue = width?.startsWith("width=")
+                                ? parseInt(width.split("=")[1], 10)
+                                : 800;
+                            const heightValue = height?.startsWith("height=")
+                                ? parseInt(height.split("=")[1], 10)
+                                : 450;
 
-                            return <Image
-                                src={src || ''}
-                                alt={altText || ''}
-                                width={widthValue}
-                                height={heightValue}
-                                className="rounded-lg"
-                                {...props}
-                            />
-                        },
-                        code: ({ node, inline, className, children, ...props }) => {
-                            const match = /language-(\w+)/.exec(className || '');
-                            return !inline && match ? (
-                                <pre className={`language-${match[1]} p-4 rounded-lg`}>
-                                    <code {...props}>{children}</code>
-                                </pre>
-                            ) : (
-                                <code className="bg-gray-200 p-1 rounded" {...props}>
-                                    {children}
-                                </code>
+                            return (
+                                    <Image
+                                        src={src || ""}
+                                        alt={altText || ""}
+                                        width={widthValue}
+                                        height={heightValue}
+                                        className="rounded-lg shadow-lg"
+                                        {...props}
+                                    />
                             );
+                        },
+                        code: ({ inline, className, children, ...props }) => {
+                            const match = /language-(\w+)/.exec(className || "");
+                            const language = match?.[1] || "text";
+
+                            if (!inline && match) {
+                                return (
+                                    <CodeBlock
+                                        language={language}
+                                        code={String(children).replace(/\n$/, "")}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <code className="" {...props}>
+                                        {children}
+                                    </code>
+                                );
+                            }
                         },
                     }}
                 >
                     {post.content}
                 </ReactMarkdown>
             </article>
+
+            <footer className="text-center my-12">
+                <p className="text-gray-600 dark:text-gray-400">
+                    Thank you for reading! Feel free to leave a comment or share your thoughts.
+                </p>
+            </footer>
         </main>
     );
 }
