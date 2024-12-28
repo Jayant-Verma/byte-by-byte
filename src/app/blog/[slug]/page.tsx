@@ -22,7 +22,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <div className="text-gray-500 mb-4 italic text-sm">{post.date}</div>
             </header>
 
-            <article className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100 shadow-lg group bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-700 p-8 rounded-lg">
+            <article className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100 shadow-lg bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-700 p-8 rounded-lg">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
