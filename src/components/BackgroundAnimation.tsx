@@ -1,9 +1,19 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
+import { useEffect, useState } from "react";
 
 const BackgroundShapes = () => {
     const { theme } = useTheme();
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return null;
+    }
 
     return (
         <div className="fixed inset-0 -z-10 overflow-hidden">

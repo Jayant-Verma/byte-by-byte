@@ -45,6 +45,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                                         width={widthValue}
                                         height={heightValue}
                                         className="rounded-lg shadow-lg"
+                                        unoptimized
                                         {...props}
                                     />
                             );
