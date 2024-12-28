@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 </ReactMarkdown>
             </article>
 
-            <footer className="text-center my-12">
+            <footer className="text-center my-12 md:my-4">
                 <p className="text-gray-600 dark:text-gray-400">
                     Thank you for reading! Feel free to leave a comment or share your thoughts.
                 </p>
