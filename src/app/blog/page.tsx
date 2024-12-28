@@ -5,7 +5,7 @@ export default async function BlogPage() {
     const posts = getSortedPostsData();
 
     return (
-        <main className="p-6 max-w-5xl mx-auto">
+        <main className="p-6 max-w-6xl mx-auto">
             {/* Header Section */}
             <section className="text-center mt-20 mb-12">
                 <h1 className="text-6xl font-extrabold mb-4 text-gray-800 dark:text-gray-200">

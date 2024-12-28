@@ -2,7 +2,7 @@ import { getPostData, getSortedPostsData } from "@/lib/posts";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
-import CodeBlock from "@/components/CodeBlock"; // Import the new CodeBlock component
+import CodeBlock from "@/components/CodeBlock"; 
 
 export async function generateStaticParams() {
     const posts = getSortedPostsData();
@@ -16,13 +16,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     const post = await getPostData(slug);
 
     return (
-        <main className="p-6 max-w-5xl mx-auto">
+        <main className="p-6 max-w-6xl mx-auto">
             <header className="text-center mt-20 mb-10">
                 <h1 className="text-5xl font-extrabold text-gray-800 dark:text-gray-200">{post.title}</h1>
                 <div className="text-gray-500 mb-4 italic text-sm">{post.date}</div>
             </header>
 
-            <article className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100">
+            <article className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100 shadow-lg group bg-gradient-to-r from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-700 p-8 rounded-lg">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
