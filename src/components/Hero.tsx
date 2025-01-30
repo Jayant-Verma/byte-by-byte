@@ -40,13 +40,14 @@ const Hero = () => {
                     {/* Call to Action Buttons */}
                     <div className="mt-8 flex justify-center gap-6">
                         <motion.a
-                            href="#about"
+                            href="/resume/resume.pdf"
+                            download="Jayant-Verma-Resume.pdf"
                             className="inline-block py-3 px-8 bg-orange-500 text-white text-xl font-semibold rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 1 }}
                         >
-                            Learn More
+                            Download CV
                         </motion.a>
 
                         <motion.a
