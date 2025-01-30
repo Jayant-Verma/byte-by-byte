@@ -1,22 +1,19 @@
-import Link from 'next/link';
-import { getSortedPostsData } from '../lib/posts';
+'use client';
 
-export default async function HomePage() {
-    const posts = getSortedPostsData();
+import About from '@/components/About';
+import ContactMe from '@/components/ContactMe';
+import EducationExperience from '@/components/EducationExperience';
+import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
+
+export default function HomePage() {
     return (
-        <main className="p-4">
-            <h1 className="text-3xl font-bold mb-4">Blog</h1>
-            <ul>
-                {posts.map(({ id, title, date }) => (
-                    <li key={id} className="mb-2">
-                        <Link href={`/blog/${id}`}>
-                            <div className="text-blue-500 hover:underline">{title}</div>
-                        </Link>
-                        <br />
-                        <small className="text-gray-500">{date}</small>
-                    </li>
-                ))}
-            </ul>
-        </main>
+        <>
+            <Hero />
+            <EducationExperience />
+            <Projects />
+            <About />
+            <ContactMe />
+        </>
     );
 }

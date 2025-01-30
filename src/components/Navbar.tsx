@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HomeIcon, UserIcon, ChatBubbleLeftIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, ChatBubbleLeftIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation"; 
 
@@ -10,9 +10,8 @@ const Navbar = () => {
 
     const navLinks = [
         { name: "Home", href: "/", icon: <HomeIcon className="w-6 h-6" /> },
-        { name: "About", href: "/about", icon: <UserIcon className="w-6 h-6" /> },
         { name: "Blog", href: "/blog", icon: <DocumentTextIcon className="w-6 h-6" /> },
-        { name: "Contact", href: "/contact", icon: <ChatBubbleLeftIcon className="w-6 h-6" /> },
+        { name: "Contact", href: "/#contact", icon: <ChatBubbleLeftIcon className="w-6 h-6" /> },
     ];
 
     const isActive = (linkHref: string) => {
