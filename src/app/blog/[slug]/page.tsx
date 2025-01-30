@@ -11,12 +11,10 @@ interface Post {
     content: string;
 }
 
-type Props = {
-    params: Promise<{
-        slug: string;
-    }>;
-    searchParams?: { [key: string]: string | string[] | undefined };
-};
+interface PageProps {
+    params: Promise<{ slug: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 export async function generateStaticParams() {
     const posts = getSortedPostsData();
@@ -25,7 +23,8 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: PageProps) {
+    // Await the params
     const { slug } = await params;
     const post: Post = await getPostData(slug);
 
