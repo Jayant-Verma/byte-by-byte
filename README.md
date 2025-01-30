@@ -165,5 +165,3 @@ Linkedin - [jayantverma](https://www.linkedin.com/in/jayantverma007/)
 Email: [jayantverma8533@gmail.com](mailto:jayantverma8533@gmail.com)
 
 ---
-
-Made with ❤️ by Jayant
