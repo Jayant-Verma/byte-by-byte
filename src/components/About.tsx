@@ -6,6 +6,7 @@ import {
     BriefcaseIcon,
     AcademicCapIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const stats = [
     {
@@ -30,10 +31,27 @@ const stats = [
     },
 ];
 
-const skills = [
-    "React.js", "Node.js", "Golang", "TypeScript", "Next.js", "Tailwind CSS",
-    "Redux Toolkit", "Express.js", "C++", "REST API", "InfluxDB", "MySQL",
-    "MongoDB", "JavaScript", "Socket.io", "Flutter", "Dart", "Git", "Docker", "Kubernetes",
+const skillBadges = [
+    { name: "React.js", icon: "react" },
+    { name: "Node.js", icon: "nodejs" },
+    { name: "Golang", icon: "go" },
+    { name: "TypeScript", icon: "typescript" },
+    { name: "Next.js", icon: "nextjs" },
+    { name: "Tailwind CSS", icon: "tailwindcss" },
+    { name: "Redux Toolkit", icon: "redux" },
+    { name: "Express.js", icon: "express" },
+    { name: "C++", icon: "cplusplus" },
+    { name: "REST API", icon: "nestjs" },
+    { name: "InfluxDB", icon: "influxdb" },
+    { name: "MySQL", icon: "mysql" },
+    { name: "MongoDB", icon: "mongodb" },
+    { name: "JavaScript", icon: "javascript" },
+    { name: "Socket.io", icon: "socketio" },
+    { name: "Flutter", icon: "flutter" },
+    { name: "Dart", icon: "dart" },
+    { name: "Git", icon: "git" },
+    { name: "Docker", icon: "docker" },
+    { name: "Kubernetes", icon: "kubernetes" },
 ];
 
 const AnimatedCounter = ({ target }: { target: number }) => {
@@ -116,14 +134,20 @@ const About = () => {
                         Technical Skills
                     </h3>
                     <div className="flex flex-wrap justify-center gap-4">
-                        {skills.map((skill, index) => (
+                        {skillBadges.map((skill, index) => (
                             <motion.span
                                 key={index}
-                                className="bg-gray-300 dark:bg-gray-800 text-sm font-semibold text-gray-900 dark:text-white py-2 px-4 rounded-full shadow-md hover:scale-105 transition-transform"
+                                className="bg-gray-300 dark:bg-gray-800 text-sm font-semibold text-gray-900 dark:text-white py-2 px-4 rounded-full shadow-md hover:scale-105 transition-transform flex items-center gap-2"
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ duration: 0.3, ease: "easeOut" }}
                             >
-                                {skill}
+                                <Image
+                                    src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-original.svg`}
+                                    alt={skill.name}
+                                    width={20}
+                                    height={20}
+                                />
+                                {skill.name}
                             </motion.span>
                         ))}
                     </div>
