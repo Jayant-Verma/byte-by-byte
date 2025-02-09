@@ -1,10 +1,6 @@
-
 ---
-
 title:  "📌 Arrays vs Slices in Go: What’s the Difference?"
-
 date:  "2025-02-05"
-
 ---
 
 When working with collections of data in **Go**, two commonly used data structures are **arrays** and **slices**. At first glance, they might seem similar, but they have crucial differences that impact performance and flexibility.
