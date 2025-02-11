@@ -56,7 +56,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     alt={altText || ""}
                                     width={widthValue}
                                     height={heightValue}
-                                    className="rounded-lg shadow-lg"
+                                    className="rounded-lg shadow-lg mx-auto"
                                     unoptimized
                                     {...props}
                                 />

@@ -13,7 +13,7 @@ export function getSortedPostsData() {
         const { data } = matter(fileContents);
         return {
             id,
-            ...(data as { title: string; date: string }),
+            ...(data as { title: string; date: string; tags?: string[] }),
         };
     }).sort((a, b) => (a.date < b.date ? 1 : -1));
 }
@@ -24,7 +24,7 @@ export function getPostData(id: string) {
     const { data, content } = matter(fileContents);
     return {
         id,
-        ...(data as { title: string; date: string }),
+        ...(data as { title: string; date: string; tags?: string[] }),
         content,
     };
 }

@@ -1,6 +1,7 @@
 ---
 title: "🌳 Tree Shaking: The Art of Cleaner, Leaner JavaScript"
 date: "2024-12-27"
+tags: ["JavaScript", "WebDevelopment", "JavaScriptOptimization"]
 ---
 
 In the fast-paced world of web development, **every kilobyte matters**. A bloated JavaScript file can slow down your app, frustrate users, and even hurt SEO rankings. That's where **Tree Shaking** comes to the rescue!
